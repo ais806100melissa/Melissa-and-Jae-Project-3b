@@ -1,0 +1,89 @@
+<html>
+<head>
+<title> main page </title>
+<script src="./processing-1.4.1.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+
+
+
+PFont starcraft;
+
+
+void setup()
+{  
+    size(600, 800);  
+    background(0,0,0);
+    frameRate(30);
+    bg1 = loadImage("images/marine.png");
+  	starcraft = loadFont("Starcraft");
+  	
+    
+
+}  
+
+void draw()
+{
+background(0,0,0);
+image(bg1,0,0,600,800);
+textFont(starcraft,30);
+
+
+
+fill(255,153,255);
+  text("Start Game",169,600);
+  text("Instruction",169,680);
+    
+	
+	
+	
+	
+ 
+       
+    
+    if (mousePressed == true && mouseButton == LEFT)
+
+{    
+    	if (mouseX > 169 && mouseX < 169+250 && mouseY >574 && mouseY <574+30)
+    {	
+		link("game screen for girl.html");
+
+    }
+}     	
+
+    if (mousePressed == true && mouseButton == LEFT)
+
+{    
+    	if (mouseX > 169 && mouseX < 169+250 && mouseY >654 && mouseY <654+30)
+    {	
+		link("instruction.html");
+
+    }
+}     	
+
+
+
+
+
+    
+  
+  
+ 
+
+     
+
+
+    
+    
+    
+       
+    
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</head>
+
+<body>
+
+</body>
+</html>

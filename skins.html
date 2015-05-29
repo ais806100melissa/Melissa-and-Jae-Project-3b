@@ -1,0 +1,32 @@
+<html>
+<head>
+<title> skins </title>
+<script src="../processing-1.4.1.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+
+PImage comingSoon;
+
+void setup()
+{  
+    size(728, 300);  
+    background(0,0,0);
+    frameRate( 30 );
+comingSoon = loadImage("images/comingSoonBanner.jpg");
+    
+}  
+
+void draw()
+{
+  
+image(comingSoon,0,0,728,300);
+
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</head>
+
+<body>
+
+</body>
+</html>

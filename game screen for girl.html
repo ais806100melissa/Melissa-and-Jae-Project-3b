@@ -1,0 +1,1319 @@
+<title> game screen </title>
+
+<!-- copy and paste the next 2 lines to setup the sound files, you must modify the loadsoundchrome.js file with your sounds -->
+<script type="text/javascript" src="script/soundmanager2.js"></script>
+<script type="text/javascript" src="script/loadsoundchrome.js"></script>
+<!-- Stop copying here -->
+
+<center>
+    <script type="text/javascript" src="script/processing-1.4.1.js"></script>
+    <script type="text/processing" data-processing-target="mycanvas">
+
+/* @pjs globalKeyEvents = "true"; */
+
+PImage FirstRedEnemy[] = new PImage [5];
+PImage ThirdRedEnemy[] = new PImage [11];
+PImage whiteEnemy[] = new PImage [6];
+PImage explode_Mutal[] = new PImage [6];
+PImage explode_Guardian[] = new PImage [6];
+PImage explode_Queen[] = new PImage [7];
+
+
+// MUTAL EXPLODE
+int number_frames_mutaliskDeath;
+int time_mutaliskDeath;
+int starttime_mutaliskdeath;
+int endtime_mutaliskdeath;
+
+//MUTLAISK CODE
+int number_frame_for_MUTALISK;
+int time_for_MUTALISK;
+int starttime_for_MUTALISK;
+int endtime_for_MUTALISK;
+
+// QUEEN CODE
+int number_frame_for_QUEEN;
+int time_for_QUEEN;
+int starttime_for_QUEEN;
+int endtime_for_QUEEN;
+
+//QUEEN EXPLKODE
+
+int number_frames_queenDeath;
+int time_queenDeath;
+int starttime_queenDeath;
+int endtime_queenDeath;
+
+// GUARDIAN CODE
+int number_frame_for_GUARDIAN;
+int time_for_GUARDIAN;
+int starttime_for_GUARDIAN;
+int endtime_for_GUARDIAN;
+
+//GUARDIAN EXPLODE
+int number_frames_guardianDeath;
+int time_guardianDeath;
+int starttime_guardianDeath;
+int endtime_guardianDeath;
+
+PImage galaxy;
+PImage galaxy2;
+PImage shot;
+PImage shot2;
+PImage shot3;
+PImage shot4;
+PImage shot5;
+PImage mainSpaceship;
+PImage explode;
+
+starcraft = loadFont("Starcraft");
+int characterX;
+int characterY;
+int characterspeed;
+int moveRight;
+int moveLeft;
+int moveUp;
+int moveDown;
+int shotX;
+int shotY;
+int shotX2;
+int shotY2;
+int shotX3;
+int shotY3;
+int shotX4;
+int shotY4;
+int shotX5;
+int shotY5;
+int shotPosition;
+int shotPosition2;
+int shotPosition3;
+int shotPosition4;
+int shotPosition5;
+int FirstRedEnemyX;
+int FirstRedEnemyY;
+int whiteEnemyX;
+int whiteEnemyY;
+int firstgalaxypictureX;
+int firstgalaxypictureY;
+int secondGalaxyPictureX;
+int secondGalaxyPictureY;
+// Exploding 1 ----------------------------------------------------------MUTALISK EXPLOSION
+int exploding;
+int explodeX;
+int explodeY;
+int explodeXsize;
+int explodeYsize;
+//Explosion 2 -----------------------------------------------------------GUARDIAN EXPLOSION
+int exploding2;
+int explodeX2;
+int explodeY2;
+int explodeXsize2;
+int explodeYsize2;
+// Explosion 3 ----------------------------------------------------------QUEEN EXPLOSION
+int exploding3;
+int explodeX3;
+int explodeY3;
+int explodeXsize3;
+int explodeYsize3;
+// Explosion 4 ----------------------------------------------------------CHARACTER EXPLOSION
+int exploding4;
+int explodeX4;
+int explodeY4;
+int explodeXsize4;
+int explodeYsize4;
+// Explosion 5 ----------------------------------------------------------CHARACTER EXPLOSION
+int exploding5;
+int explodeX5;
+int explodeY5;
+int explodeXsize5;
+int explodeYsize5;
+//Explosion 6 ----------------------------------------------------------CHARACTER EXPLOSION
+int exploding6;
+int explodeX6;
+int explodeY6;
+int explodeXsize6;
+int explodeYsize6;
+// ----------------------------------------------------------------------Destroyed Counter
+int numberDestroyed;
+//-----------------------------------------------------------------------ENEMY SPEED
+int enemy1speed;
+int enemy2speed;
+int enemy3speed;
+
+///enemy 3
+int ThirdRedEnemyX;
+int ThirdRedEnemyY;
+
+int turn_background;
+int d;
+int d2;
+int d3;
+int d4;
+int d5;
+int d6;
+int d7;
+int d8;
+int d9;
+int d10;
+int d11;
+int d12;
+int d13;
+int d14;
+int d15;
+int d16;
+int d17;
+int d18;
+
+float a;
+
+int music;
+int musicControl;
+
+//Powerup
+PImage powerUp;
+int powerUpDistance;
+int powerUpX;
+int powerUpY;
+int powerUpTime;
+int powerUpStart;
+int powerUpEnd;
+
+int speed1;
+int speed2;
+int speed3;
+
+int a;
+int b;
+
+
+void setup()
+{  
+		size(600, 800);  
+		background(0,0,0);
+		frameRate(30);
+		galaxy = loadImage("images/galaxy.jpg");
+		galaxy2 = loadImage("images/galaxy.jpg");	
+		character = loadImage("images/mainSpaceship.png");
+		shot = loadImage("images/shot.png");
+		shot2 = loadImage("images/shot.png");
+		shot3 = loadImage("images/shot.png");
+		shot4 = loadImage("images/shot.png");
+		shot5 = loadImage("images/shot.png");
+		powerUp = loadImage("images/PowerUp.png");
+		
+//MUTALISK CODEEEEEE
+    number_frame_for_MUTALISK = 1;
+    while(number_frame_for_MUTALISK <= 5)
+    {
+    	FirstRedEnemy[number_frame_for_MUTALISK] = loadImage("images/mutaliskFly"+number_frame_for_MUTALISK+".png");
+    	number_frame_for_MUTALISK = number_frame_for_MUTALISK + 1;	
+    }  
+
+    time_for_MUTALISK = 0;
+//QUEEN CODEEEEE
+    number_frame_for_QUEEN = 1;
+    while(number_frame_for_QUEEN <= 11)
+    {
+    
+    	ThirdRedEnemy[number_frame_for_QUEEN] = loadImage("images/queenFly"+number_frame_for_QUEEN+".png");
+    	number_frame_for_QUEEN = number_frame_for_QUEEN+1;
+    	
+    }  
+	time_for_QUEEN = 0;
+// GUARDIAN CODEEEE
+    number_frame_for_GUARDIAN = 1;
+    while(number_frame_for_GUARDIAN <= 6)
+    {
+    
+    	whiteEnemy[number_frame_for_GUARDIAN] = loadImage("images/guardianFly"+number_frame_for_GUARDIAN+".png");
+    	number_frame_for_GUARDIAN = number_frame_for_GUARDIAN+1;
+    	
+    }  
+
+	time_for_GUARDIAN = 0;
+
+/// MutaLisk Explosion  Codeeeee
+		 number_frames_mutaliskDeath = 1;
+    while(number_frames_mutaliskDeath <= 6)
+    {
+    	explode_Mutal[number_frames_mutaliskDeath] = loadImage("images/mutaliskDeath"+number_frames_mutaliskDeath+".png");
+    	number_frames_mutaliskDeath = number_frames_mutaliskDeath + 1;
+    }
+    	explodeX = -200;
+		explodeY = -300;
+
+	time_mutaliskdeath = 0;
+
+/// GUARDIAN EXPLOSION CODEEEEEEE
+    number_frames_guardianDeath = 1;
+    while(number_frames_guardianDeath <= 6)
+    {
+    
+    	explode_Guardian[number_frames_guardianDeath] = loadImage("images/guardianDeath"+number_frames_guardianDeath+".png");
+    	number_frames_guardianDeath = number_frames_guardianDeath + 1;	
+    }
+    
+	time_guardianDeath = 0;
+
+// Queen Explosion Codeeeeee
+	number_frames_queenDeath = 1;
+    while(number_frames_queenDeath <= 7)
+    {
+    	explode_Queen[number_frames_queenDeath] = loadImage("images/queenDeath"+number_frames_queenDeath+".png");
+    	number_frames_queenDeath = number_frames_queenDeath +1;	
+    }
+    
+time_queenDeath = 0;
+
+		explode = loadImage("images/explode.png");
+		characterY = 600;
+		characterX = 100;
+		characterspeed = 15;
+		moveRight = 0;
+		moveLeft = 0;
+		moveUp = 0;
+		moveDown = 0;
+		shotPosition = 0;
+		FirstRedEnemyX = 200;
+		FirstRedEnemyY = -30;
+		whiteEnemyX = 350;
+		whiteEnemyY = 70;
+		firstgalaxypictureX = 0;
+		firstgalaxypictureY = 0;
+		secondGalaxyPictureX = 0;
+		secondGalaxyPictureY = 800;
+
+		turn_background = 1;
+		a = 0;
+		exploding = 0;
+		numberDestroyed = 0;
+
+		enemy1speed = 4;
+		enemy2speed = 4;
+
+		explodeXsize = 150;
+		explodeYsize = 170;
+
+		exploding2 = 0;
+		explodeX2 = -200;
+		explodeY2 = -300;
+		explodeXsize2 = 150;
+		explodeYsize2 = 170;
+
+		music = 0;
+		musicControl = 0;
+		
+//// enemy3///
+	ThirdRedEnemyX = 100;
+	ThirdRedEnemyY = -20;
+	explodeX3 = -200;
+	explodeY3 = -300;
+	explodeXsize3 = 150;
+	explodeYsize3 = 170;
+	enemy3speed = 4;
+	exploding3 = 0;
+/// character burst//
+	explodeX4 = -200;
+	explodeY4 = -300;
+	explodeXsize4 = 150;
+	explodeYsize4 = 170;
+	exploding4 = 0;
+
+	explodeX5 = -200;
+	explodeY5 = -300;
+	explodeXsize5 = 150;
+	explodeYsize5 = 170;
+	exploding5 = 0;
+
+	explodeX6 = -200;
+	explodeY6 = -300;
+	explodeXsize6 = 150;
+	explodeYsize6 = 170;
+	exploding6 = 0;
+	
+	//Power Up
+	
+	a = 1;
+	while(a <= 4)
+	{
+		powerUpDistance[a] = (int)sqrt(sq(powerUpY[b]- characterY));
+		a = a + 1;
+	}
+	powerUpDistance = 0;
+
+	powerUpX = 20;
+	
+	powerUpY = 0;
+	
+	powerUpTime = 0;
+	powerUpStart = 0;
+	powerUpEnd = 0;
+	
+	speed1 = 0;
+	speed2 = 0;
+	speed3 = 0;
+}  
+
+void draw()
+{
+	background(0,0,0);
+	image(galaxy,firstgalaxypictureX,firstgalaxypictureY,600,800);
+	image(galaxy2,secondGalaxyPictureX,secondGalaxyPictureY,600,800);
+
+
+	image(explode,explodeX4,explodeY4,explodeXsize4,explodeYsize4);
+	image(explode,explodeX5,explodeY5,explodeXsize5,explodeYsize5);
+	image(explode,explodeX6,explodeY6,explodeXsize6,explodeYsize6);
+
+	image(character,characterX,characterY,100,150);
+
+
+if (music == 0)
+{
+	soundManager.play('s0');
+	musicControl = 1;
+}
+
+if ( musicControl == 1)
+{ 
+	music = 1;
+}
+
+
+//enemy 1 	
+	number_frame_for_MUTALISK = 1;
+	starttime_for_MUTALISK = 0;
+	endtime_for_MUTALISK = 5;
+
+	while (number_frame_for_MUTALISK <=5)
+	{
+		if (time_for_MUTALISK >= starttime_for_MUTALISK && time_for_MUTALISK <= endtime_for_MUTALISK && numberDestroyed <= 50)
+		{
+			image(FirstRedEnemy[number_frame_for_MUTALISK],FirstRedEnemyX,FirstRedEnemyY,150,200);
+		}
+		
+		if (time_for_MUTALISK >= starttime_for_MUTALISK && time_for_MUTALISK <= endtime_for_MUTALISK && numberDestroyed >= 50 && numberDestroyed <= 80)
+		{
+			image(FirstRedEnemy[number_frame_for_MUTALISK],FirstRedEnemyX,FirstRedEnemyY,100,140);
+		}
+		
+		if (time_for_MUTALISK >= starttime_for_MUTALISK && time_for_MUTALISK <= endtime_for_MUTALISK && numberDestroyed >= 80)
+		{
+			image(FirstRedEnemy[number_frame_for_MUTALISK],FirstRedEnemyX,FirstRedEnemyY,60,85);
+		}
+
+		number_frame_for_MUTALISK = number_frame_for_MUTALISK + 1;
+		starttime_for_MUTALISK = starttime_for_MUTALISK + 5;
+		endtime_for_MUTALISK = endtime_for_MUTALISK + 5;	
+	}
+
+	a = a + PI/20;
+	FirstRedEnemyY = FirstRedEnemyY + enemy1speed;
+	FirstRedEnemyX = FirstRedEnemyX + 7*cos(a/2);
+
+	time_for_MUTALISK = time_for_MUTALISK + 1;
+
+	if (time_for_MUTALISK == 25)
+	{
+		time_for_MUTALISK = 0;
+	}	
+
+// enemy 2
+
+number_frame_for_GUARDIAN = 1;
+starttime_for_GUARDIAN = 0;
+endtime_for_GUARDIAN = 5;
+	while (number_frame_for_GUARDIAN <=6)
+	{
+		if(time_for_GUARDIAN >= starttime_for_GUARDIAN  && time_for_GUARDIAN  <= endtime_for_GUARDIAN && numberDestroyed <= 50)
+		{
+			image(whiteEnemy[number_frame_for_GUARDIAN],whiteEnemyX,whiteEnemyY,150,150);
+		}
+		
+		if(time_for_GUARDIAN >= starttime_for_GUARDIAN  && time_for_GUARDIAN  <= endtime_for_GUARDIAN && numberDestroyed >= 50 && numberDestroyed <= 80) 
+		{
+			image(whiteEnemy[number_frame_for_GUARDIAN],whiteEnemyX,whiteEnemyY,70,70);
+		}
+		
+		if(time_for_GUARDIAN >= starttime_for_GUARDIAN  && time_for_GUARDIAN  <= endtime_for_GUARDIAN && numberDestroyed >= 80 ) 
+		{
+			image(whiteEnemy[number_frame_for_GUARDIAN],whiteEnemyX,whiteEnemyY,45,45);
+		}
+		
+		number_frame_for_GUARDIAN  = number_frame_for_GUARDIAN  + 1;
+		starttime_for_GUARDIAN  = starttime_for_GUARDIAN  + 5;
+		endtime_for_GUARDIAN  = endtime_for_GUARDIAN  + 5;	
+	}
+
+	
+	
+	time_for_GUARDIAN  = time_for_GUARDIAN  +1;
+
+	if (time_for_GUARDIAN == 30)
+	{
+		time_for_GUARDIAN = 0;
+	}
+
+	a = a + PI/20;
+	whiteEnemyY = whiteEnemyY + enemy2speed;
+	whiteEnemyX = whiteEnemyX + 5*sin(a/2);
+
+//  enemy 3
+
+	number_frame_for_QUEEN = 1;
+	starttime_for_QUEEN = 0;
+	endtime_for_QUEEN = 3;
+	while (number_frame_for_QUEEN <=11)
+	{
+		if(time_for_QUEEN >= starttime_for_QUEEN && time_for_QUEEN <= endtime_for_QUEEN && numberDestroyed <= 50)
+		{
+			image(ThirdRedEnemy[number_frame_for_QUEEN],ThirdRedEnemyX,ThirdRedEnemyY,100,100);
+		}
+		
+		if(time_for_QUEEN >= starttime_for_QUEEN && time_for_QUEEN <= endtime_for_QUEEN && numberDestroyed >= 50 && numberDestroyed <= 80)
+		{
+			image(ThirdRedEnemy[number_frame_for_QUEEN],ThirdRedEnemyX,ThirdRedEnemyY,70,70);
+		}
+		
+		if(time_for_QUEEN >= starttime_for_QUEEN && time_for_QUEEN <= endtime_for_QUEEN && numberDestroyed >= 580)
+		{
+			image(ThirdRedEnemy[number_frame_for_QUEEN],ThirdRedEnemyX,ThirdRedEnemyY,45,45);
+		}
+		
+		number_frame_for_QUEEN = number_frame_for_QUEEN + 1;
+		starttime_for_QUEEN = starttime_for_QUEEN + 3;
+		endtime_for_QUEEN = endtime_for_QUEEN + 3;	
+	}
+
+	time_for_QUEEN = time_for_QUEEN +1;
+
+	if (time_for_QUEEN == 33)
+	{
+		time_for_QUEEN = 0;
+	}
+
+	a = a + PI/20;
+	ThirdRedEnemyY = ThirdRedEnemyY + enemy3speed;
+	ThirdRedEnemyX = ThirdRedEnemyX + 6*sin(a/2);
+
+
+// Explosion related Distance
+ 	d = (int)sqrt(sq(FirstRedEnemyX-shotX)+sq(FirstRedEnemyY-shotY));
+
+	d2 = (int)sqrt(sq(whiteEnemyX + 40-shotX)+sq(whiteEnemyY + 20-shotY));
+
+    d3 = (int)sqrt(sq(FirstRedEnemyX-characterX)+sq(FirstRedEnemyY-characterY));
+
+    d4 = (int)sqrt(sq(whiteEnemyX-characterX)+sq(whiteEnemyY-characterY));
+
+    d5 = (int)sqrt(sq(ThirdRedEnemyX -shotX)+sq(ThirdRedEnemyY -shotY));
+
+    d6 = (int)sqrt(sq(ThirdRedEnemyX -characterX)+sq(ThirdRedEnemyY -characterY));
+
+	d7 = (int)sqrt(sq(FirstRedEnemyX-shotX2)+sq(FirstRedEnemyY-shotY2));
+
+	d8 = (int)sqrt(sq(whiteEnemyX + 40-shotX2)+sq(whiteEnemyY + 20-shotY2));
+
+	d9 = (int)sqrt(sq(ThirdRedEnemyX -shotX2)+sq(ThirdRedEnemyY -shotY2));
+
+	d10 = (int)sqrt(sq(FirstRedEnemyX-shotX3)+sq(FirstRedEnemyY-shotY3));
+
+	d11 = (int)sqrt(sq(whiteEnemyX + 40-shotX3)+sq(whiteEnemyY + 20-shotY3));
+
+	d12 = (int)sqrt(sq(ThirdRedEnemyX -shotX3)+sq(ThirdRedEnemyY -shotY3)); 
+
+	d13 = (int)sqrt(sq(FirstRedEnemyX-shotX4)+sq(FirstRedEnemyY-shotY4));
+
+	d14 = (int)sqrt(sq(whiteEnemyX + 40-shotX4)+sq(whiteEnemyY + 20-shotY4));
+
+	d15 = (int)sqrt(sq(ThirdRedEnemyX -shotX4)+sq(ThirdRedEnemyY -shotY4)); 
+
+	d16 = (int)sqrt(sq(FirstRedEnemyX-shotX5)+sq(FirstRedEnemyY-shotY5));
+
+	d17 = (int)sqrt(sq(whiteEnemyX + 40-shotX5)+sq(whiteEnemyY + 20-shotY5));
+
+	d18 = (int)sqrt(sq(ThirdRedEnemyX -shotX5)+sq(ThirdRedEnemyY -shotY5)); 
+
+// Enemy numberDestroyed counter
+
+    fill(0,255,0);
+    text(numberDestroyed,580,30);
+    
+// Respawn of enemy1 after being destroyed... Randomized.
+   if (d <= 70 && shotY <= characterY - 20)
+   {
+   		FirstRedEnemyX = random(50,400) + random(50,100);
+   		FirstRedEnemyY = -400;
+   		shotPosition = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX = shotX-30;
+		explodeY = shotY;
+		number_frames_mutaliskDeath = 0;
+		exploding = 1;
+   	}
+
+   if (d7 <= 70 && shotY2 <= characterY - 20)
+   {
+   		FirstRedEnemyX = random(50,400) + random(50,100);
+   		FirstRedEnemyY = -400;
+   		shotPosition2 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX = shotX2-30;
+		explodeY = shotY2;
+			number_frames_mutaliskDeath = 0;
+		exploding = 1;
+   	}
+
+   if (d10 <= 70 && shotY3 <= characterY - 20)
+   {
+   		FirstRedEnemyX = random(50,400) + random(50,100);
+   		FirstRedEnemyY = -400;
+   		shotPosition3 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX = shotX3-30;
+		explodeY = shotY3;
+		number_frames_mutaliskDeath = 0;
+		exploding = 1;
+   	}
+
+   if (d13 <= 70 && shotY4 <= characterY - 20)
+   {
+   		FirstRedEnemyX = random(50,400) + random(50,100);
+   		FirstRedEnemyY = -400;
+   		shotPosition4 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX = shotX4-30;
+		explodeY = shotY4;
+		number_frames_mutaliskDeath = 0;
+		exploding = 1;
+   	}
+
+   	   if (d16 <= 70 && shotY5 <= characterY - 20)
+   {
+   		FirstRedEnemyX = random(50,400) + random(50,100);
+   		FirstRedEnemyY = -400;
+   		shotPosition5 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX = shotX5-30;
+		explodeY = shotY5;
+		number_frames_mutaliskDeath = 0;
+		exploding = 1;
+   	}
+//// GUARDIAN 
+
+   	   if (d2 <= 55 && shotY <= characterY - 20 && shotPosition == 1)
+   {
+   		whiteEnemyX = random(100,350) + random(50,100);
+   		whiteEnemyY = -200;
+   		shotPosition = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX2 = shotX-50;
+		explodeY2 = shotY-50;
+		number_frames_guardianDeath = 0;
+		exploding2 = 1;
+   	}
+   	   	   if (d8 <= 55 && shotY2 <= characterY - 20 && shotPosition2 == 1)
+   {
+   		whiteEnemyX = random(100,350) + random(50,100);
+   		whiteEnemyY = -200;
+   		shotPosition2 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX2 = shotX2-50;
+		explodeY2 = shotY2-50;
+		number_frames_guardianDeath = 0;
+		exploding2 = 1;
+   	}
+
+   	if (d11 <= 55 && shotY3 <= characterY - 20 && shotPosition3 == 1)
+   {
+   		whiteEnemyX = random(100,350) + random(50,100);
+   		whiteEnemyY = -200;
+   		shotPosition3 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX2 = shotX3-50;
+		explodeY2 = shotY3-50;
+		number_frames_guardianDeath = 0;
+		exploding2 = 1;
+   	}
+   	   	if (d14 <= 55 && shotY4 <= characterY - 20 && shotPosition4 == 1)
+   {
+   		whiteEnemyX = random(100,350) + random(50,100);
+   		whiteEnemyY = -200;
+   		shotPosition4 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX2 = shotX4-50;
+		explodeY2 = shotY4-50;
+		number_frames_guardianDeath = 0;
+		exploding2 = 1;
+   	}
+   	   	if (d17 <= 55 && shotY5 <= characterY - 20 && shotPosition5 == 1)
+   {
+   		whiteEnemyX = random(100,350) + random(50,100);
+   		whiteEnemyY = -200;
+   		shotPosition5 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX2 = shotX5-50;
+		explodeY2 = shotY5-50;
+		number_frames_guardianDeath = 0;
+		exploding2 = 1;
+   	}
+
+   ///// QUEEN 
+   if (d5 <= 70 && shotY <= characterY - 20)
+   {
+   		ThirdRedEnemyX = random(50,400) + random(50,100);
+   		ThirdRedEnemyY = -400;
+   		shotPosition = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX3 = shotX-15;
+		explodeY3 = shotY-50;
+		number_frames_queenDeath = 0;
+		exploding3 = 1;
+   	}
+   	   if (d9 <= 70 && shotY2 <= characterY - 20)
+   {
+   		ThirdRedEnemyX = random(50,400) + random(50,100);
+   		ThirdRedEnemyY = -400;
+   		shotPosition2 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX3 = shotX2-15;
+		explodeY3 = shotY2-50;
+		number_frames_queenDeath = 0;
+		exploding3 = 1;
+   	}
+
+   	   	 if (d12 <= 70 && shotY3 <= characterY - 20)
+   {
+   		ThirdRedEnemyX = random(50,400) + random(50,100);
+   		ThirdRedEnemyY = -400;
+   		shotPosition3 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX3 = shotX3-15;
+		explodeY3 = shotY3-50;
+		number_frames_queenDeath = 0;
+		exploding3 = 1;
+   	}
+
+   	   	 if (d15 <= 70 && shotY4 <= characterY - 20)
+   {
+   		ThirdRedEnemyX = random(50,400) + random(50,100);
+   		ThirdRedEnemyY = -400;
+   		shotPosition4 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX3 = shotX4-15;
+		explodeY3 = shotY4-50;
+		number_frames_queenDeath = 0;
+		exploding3 = 1;
+   	}
+   	   	 if (d18 <= 70 && shotY5 <= characterY - 20)
+   {
+   		ThirdRedEnemyX = random(50,400) + random(50,100);
+   		ThirdRedEnemyY = -400;
+   		shotPosition5 = 0;
+   		numberDestroyed = numberDestroyed + 1;
+   		explodeX3 = shotX5-15;
+		explodeY3 = shotY5-50;
+		number_frames_queenDeath = 0;
+		exploding3 = 1;
+   	}
+//speeeeeeeed///
+if (numberDestroyed == 5)
+	{
+	enemy1speed = 7;
+	enemy2speed = 7;
+	enemy3speed = 7;
+	}
+
+if (numberDestroyed == 10)
+	{
+	enemy1speed = 9;
+	enemy2speed = 9;
+	enemy3speed = 9;
+	}
+
+if (numberDestroyed == 15)
+	{
+	enemy1speed = 11;
+	enemy2speed = 11;
+	enemy3speed = 11;
+	}
+
+if (numberDestroyed == 20)
+	{
+	enemy1speed = 13;
+	enemy2speed = 13;
+	enemy3speed = 13;
+	}
+
+//Added 1 more speed level
+if(numberDestroyed == 100)
+	{
+	enemy1speed = 15;
+	enemy2speed = 15;
+	enemy3speed = 15;
+	}
+
+/// Explosion ///
+	if(exploding == 1)
+	{
+	///////////////////////////////// MUTALISK BETA TEST ///////////////////////////////
+number_frames_mutaliskdeath = 1;
+starttime_mutaliskdeath = 0;
+endtime_mutaliskdeath = 3;
+
+while (number_frames_mutaliskdeath <=6)
+{
+	if(time_mutaliskdeath >= starttime_mutaliskdeath && time_mutaliskdeath <= endtime_mutaliskdeath)
+		{
+			image(explode_Mutal[number_frames_mutaliskdeath],explodeX,explodeY,200,200);
+		}
+	
+		number_frames_mutaliskdeath = number_frames_mutaliskdeath + 1;
+		starttime_mutaliskdeath = starttime_mutaliskdeath + 3;
+		endtime_mutaliskdeath = endtime_mutaliskdeath + 3;	
+	}
+
+	time_mutaliskdeath = time_mutaliskdeath + 1;
+
+	if (time_mutaliskdeath == 30)
+	{ 
+		time_mutaliskdeath = 0;
+		exploding = 0;
+	}
+		soundManager.play('s2');
+}
+	if (exploding == 0)
+	{
+		number_frames_mutaliskdeath = 1;
+	}
+
+
+
+//////////////////////////////////GUARDIAN BETA TEST//////////////////////////////////////////////////
+
+	if(exploding2 == 1)
+{
+
+number_frames_guardianDeath = 1;
+starttime_guardianDeath = 0;
+endtime_guardianDeath = 5;
+while (number_frames_guardianDeath <=6)
+{
+	if(time_guardianDeath >= starttime_guardianDeath && time_guardianDeath <= endtime_guardianDeath)
+	{
+		image(explode_Guardian[number_frames_guardianDeath],explodeX2,explodeY2,200,200);
+	}
+	
+	number_frames_guardianDeath = number_frames_guardianDeath + 1;
+	starttime_guardianDeath = starttime_guardianDeath + 5;
+	endtime_guardianDeath = endtime_guardianDeath + 5;	
+}
+
+time_guardianDeath = time_guardianDeath +1;
+
+	if (time_guardianDeath == 30)
+	{
+		time_guardianDeath = 0;
+		exploding2 = 0;
+	}
+
+	soundManager.play('s2');
+	
+}
+	if (exploding2 == 0)
+	{
+		number_frames_guardianDeath = 1;
+	}
+
+//////////////////////////////////QUEEN BETA TEST//////////////////////////////////////////////////
+
+   		if(exploding3 == 1)
+	{
+
+		number_frames_queenDeath = 1;
+		starttime_queenDeath = 0;
+		endtime_queenDeath = 5;
+		while (number_frames_queenDeath <=7)
+		{
+			if(time_queenDeath >= starttime_queenDeath && time_queenDeath <= endtime_queenDeath)
+			{
+				image(explode_Queen[number_frames_queenDeath],explodeX3,explodeY3,200,200);
+			}
+			
+			number_frames_queenDeath = number_frames_queenDeath + 1;
+			starttime_queenDeath = starttime_queenDeath + 5;
+			endtime_queenDeath = endtime_queenDeath + 5;	
+		}
+
+		time_queenDeath = time_queenDeath +1;
+
+		if (time_queenDeath == 35)
+		{
+			time_queenDeath = 0;
+			exploding3 = 0;
+		}
+
+		soundManager.play('s2');
+	}
+	if (exploding3 == 0)
+	{
+		number_frames_queenDeath = 1;
+	}
+
+	   if(exploding4 == 1)
+	{
+		explodeXsize4 = explodeXsize4 + 1;
+		explodeYsize4 = explodeYsize4 + 1;
+		soundManager.play('s2');
+	}
+	if (exploding4 == 2)
+	{
+		link("over.html");
+	}
+	
+	if (exploding4 == 2 && numberDestroyed >= 80)
+	{
+		link("over for girl.html");
+	}
+
+	   if(exploding5 == 1)
+	{
+		explodeXsize5 = explodeXsize5 + 1;
+		explodeYsize5 = explodeYsize5 + 1;
+		soundManager.play('s2');
+	}
+	if (exploding5 == 2)
+	{
+		link("over.html");
+	}
+
+	if (exploding5 == 2 && numberDestroyed >= 80)
+	{
+		link("over for girl.html");
+	}
+
+		   if(exploding6 == 1)
+	{
+		explodeXsize6 = explodeXsize6 + 1;
+		explodeYsize6 = explodeYsize6 + 1;
+		soundManager.play('s2');
+	}
+	if (exploding6 == 2)
+	{
+		link("over.html");
+	}
+	
+	if (exploding6 == 2 && numberDestroyed >= 80)
+	{
+		link("over for girl.html");
+	}
+
+		if(explodeXsize2 == 155 && explodeYsize2 == 175)
+	{
+		exploding2 = 0;
+	}
+		if(explodeXsize3 == 155 && explodeYsize3 == 175)
+	{
+		exploding3 = 0;
+	}
+		if(explodeXsize4 == 155 && explodeYsize4 == 175)
+	{
+		exploding4 = 2;
+	}
+
+		if(explodeXsize5 == 155 && explodeYsize5 == 175)
+	{
+		exploding5 = 2;
+	}
+			if(explodeXsize6 == 155 && explodeYsize6 == 175)
+	{
+		exploding6 = 2;
+	}
+	
+	//Power Up Appearing
+powerUpTime = powerUpTime + 1;
+
+b = 1;
+powerUpStart = 150;
+powerUpEnd = 250;
+speed1 = 0;
+while(b <= 4)
+	{	
+		if(powerUpY >= 606)
+		{
+			powerUpY = 0;
+		}	
+		
+		//Speed Change
+			
+			//Record speed before power up
+			
+				if(powerUpTime == powerUpStart - 1)
+				{
+					speed1 = enemy1speed;
+					speed2 = enemy2speed;
+					speed3 = enemy3speed;
+				}
+			//Change speed
+				if(powerUpTime >= powerUpStart && powerUpTime <= powerUpEnd)
+				{
+					image(powerUp,powerUpX,powerUpY,200,100);
+					powerUpY = powerUpY + 6;
+					enemy1speed = 0;
+					enemy2speed = 0;
+					enemy3speed = 0;
+				}
+				
+			//Resume speed after power up
+				if(powerUpTime == powerUpEnd + 1)
+				{
+					enemy1speed = speed1;
+					enemy2speed = speed2;
+					enemy3speed = speed3;
+				}		
+				
+				b = b + 1;	
+		
+				powerUpStart = powerUpStart + 1000;
+		
+				powerUpEnd = powerUpEnd + 1000;
+	}
+
+
+   	/// GAME OVER CODE
+   		if (d3 <= 70)
+
+   		{
+			exploding4 = 1;
+			explodeX4 = characterX;
+			explodeY4 = characterY;
+			characterX = -300;
+			characterY = -1000;
+   		}
+
+   		if (d4 <= 70)
+   		{
+			exploding5 = 1;
+			explodeX5 = characterX;
+			explodeY5 = characterY;
+			characterX = -300;
+			characterY = -1000;
+   		}
+
+   		if (d6 <= 70)
+   		{
+			exploding6 = 1;
+			explodeX6 = characterX;
+			explodeY6 = characterY;
+			characterX = -300;
+			characterY = -1000;
+   		}
+
+  		if (FirstRedEnemyY > 600)
+  		{
+  			link("over.html");
+  		}
+
+  		if (whiteEnemyY > 700)
+  		{
+  			link("over.html");
+  		}
+
+  		if (ThirdRedEnemyY > 600)
+  		{
+  			link("over.html");
+  		}
+  		
+  		if (FirstRedEnemyY > 600 && numberDestroyed >= 80)
+  		{
+  			link("over for girl.html");
+  		}
+
+  		if (whiteEnemyY > 700 && numberDestroyed >= 80)
+  		{
+  			link("over for girl.html");
+  		}
+
+  		if (ThirdRedEnemyY > 600 && numberDestroyed >= 80)
+  		{
+  			link("over for girl.html");
+  		}
+
+	// wallpaper galaxy moving 
+	if (turn_background == 1)
+	{
+		firstgalaxypictureY = firstgalaxypictureY - 2;
+		secondGalaxyPictureY = secondGalaxyPictureY -2;
+	}
+
+	if (firstgalaxypictureY == -800)
+	{
+		firstgalaxypictureY = 0;
+	}
+
+	if (secondGalaxyPictureY == 0)
+	{
+		secondGalaxyPictureY = 800;
+	}
+
+	if (firstgalaxypictureY == 0 && secondGalaxyPictureY == 800)
+	{
+		turn_background = 1;
+	}
+	
+//boundary setting 
+	if (characterX > 490)
+	{
+		moveRight = 0;
+	
+	}
+
+	if (characterX < 10)
+	{
+		moveLeft = 0;
+	}
+
+
+	if (characterY < 10)
+	{
+		moveUp = 0;
+	}
+
+	if (characterY > 640)
+	{
+		moveDown = 0;
+	}
+
+	//movement control
+	
+	if (moveRight == 1)
+	{
+		characterX =characterX + characterspeed;
+	}
+
+	if (moveLeft == 1)
+	{
+		characterX =characterX - characterspeed;
+	}
+
+	if (moveUp == 1)
+	{
+		characterY =characterY - characterspeed;
+	}
+
+	if (moveDown == 1)
+	{
+		characterY =characterY + characterspeed;
+	}
+	
+	//shooting control
+
+	if (shotY < 0)
+	{
+		shotPosition = 0
+	}
+	
+	if (shotPosition == 0)
+	{
+		shotX = characterX + 5;
+		shotY = characterY - 10;
+	}
+	
+	if (shotPosition == 1)
+	{
+		image(shot,shotX,shotY,80,80);
+		shotY = shotY - 30;
+	}
+		if (shotY2 < 0)
+	{
+		shotPosition2 = 0
+	}
+	
+	if (shotPosition2 == 0)
+	{
+		shotX2 = characterX + 5;
+		shotY2 = characterY - 11;
+	}
+	
+	if (shotPosition2 == 1)
+	{
+		image(shot2,shotX2,shotY2,80,80);
+		shotY2 = shotY2 - 30;
+	}
+
+		if (shotY3 < 0)
+	{
+		shotPosition3 = 0
+	}
+	
+	if (shotPosition3 == 0)
+	{
+		shotX3 = characterX + 5;
+		shotY3 = characterY - 11;
+	}
+	
+	if (shotPosition3 == 1)
+	{
+		image(shot3,shotX3,shotY3,80,80);
+		shotY3 = shotY3 - 30;
+	}
+
+
+		if (shotY4 < 0)
+	{
+		shotPosition4 = 0
+	}
+	
+	if (shotPosition4 == 0)
+	{
+		shotX4 = characterX + 5;
+		shotY4 = characterY - 11;
+	}
+	
+	if (shotPosition4 == 1)
+	{
+		image(shot4,shotX4,shotY4,80,80);
+		shotY4 = shotY4 - 30;
+	}
+
+			if (shotY5 < 0)
+	{
+		shotPosition5 = 0
+	}
+	
+	if (shotPosition5 == 0)
+	{
+		shotX5 = characterX + 5;
+		shotY5 = characterY - 11;
+	}
+	
+	if (shotPosition5 == 1)
+	{
+		image(shot5,shotX5,shotY5,80,80);
+		shotY5 = shotY5 - 30;
+	}
+
+	
+//Score deliver to game over page (add)
+ sessionStorage.transferx1 = numberDestroyed;
+
+}
+void keyPressed()
+{
+
+if(key == ' ' && shotPosition == 0)
+	{
+			shotPosition = 1;	
+			soundManager.play('s1');
+	}
+
+if(key == ' ' && shotPosition == 1 && shotPosition2 == 0)
+	{
+			shotPosition2 = 1;	
+			soundManager.play('s1');
+			shotPosition = 0;	
+	}
+
+if(key == ' ' && shotPosition2 == 1 && shotPosition3 == 0)
+	{
+			shotPosition3 = 1;	
+			soundManager.play('s1');
+			shotPosition2 = 0;	
+	}
+
+	if(key == ' ' && shotPosition3 == 1 && shotPosition4 == 0)
+	{
+			shotPosition4 = 1;	
+			soundManager.play('s1');
+			shotPosition3 = 0;	
+	}
+
+	if(key == ' ' && shotPosition4 == 1 && shotPosition5 == 0)
+	{
+			shotPosition5 = 1;	
+			soundManager.play('s1');
+			shotPosition4 = 0;	
+	}
+
+	if (key == CODED)
+{
+		 if(keyCode == RIGHT)
+	{
+			moveRight = 1;
+	}
+}
+
+if (key == CODED)
+{
+		if (keyCode == LEFT)
+	{
+		moveLeft = 1;
+	}
+}
+
+if (key == CODED)
+{
+		if (keyCode == UP)
+	{
+		moveUp = 1;
+	}
+}
+
+if (key == CODED)
+{
+		if (keyCode == DOWN)
+	{
+		moveDown = 1;
+	}
+}
+
+//shooting 
+
+		
+}
+	
+void keyReleased()
+{
+	if (key == CODED)
+{
+		 if(keyCode == RIGHT)
+	{
+			moveRight = 0;
+	}
+}
+
+if (key == CODED)
+{
+		if (keyCode == LEFT)
+	{
+		moveLeft = 0;
+	}
+}
+
+if (key == CODED)
+{
+
+		if (keyCode == UP)
+	{
+		moveUp = 0;
+	}
+}
+
+if (key == CODED)
+{
+		if (keyCode == DOWN)
+	{
+		moveDown = 0;
+	}
+}
+
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</head>
+
+<body>
+
+</body>
+</html>

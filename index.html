@@ -1,0 +1,53 @@
+<html>
+<head>
+<title> intro page </title>
+<script src="processing-1.4.1.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+
+PImage wallpaper;
+PFont starcraft;
+
+void setup()
+{  
+    size(600,800);  
+    background(0,0,0);
+    frameRate(30);
+   	wallpaper = loadImage("images/introduction.jpg");
+	starcraft = loadFont("Starcraft");
+}  
+
+void draw()
+{
+    
+   image(wallpaper,0,0,600,800);
+   
+   textFont(starcraft,30);
+   
+    fill(255,255,255);
+    text("click anywhere",200,700); 
+ 
+   
+    
+     if (mousePressed == true && mouseButton == LEFT)
+
+{    
+    	if (mouseX > 0 && mouseX < 600 && mouseY >0 && mouseY <800)
+    {	
+		link("gender selection page.html");
+
+    }  
+  
+}     	
+     
+
+    
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</head>
+
+<body>
+
+</body>
+</html>
